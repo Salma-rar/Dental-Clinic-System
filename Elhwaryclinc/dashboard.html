@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - Al-Hawary Clinic</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-tooth"></i> Al-Hawary Clinic</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="patients.html"><i class="fas fa-user-injured"></i> المرضى</a></li>
+                <li><a href="appointments.html"><i class="fas fa-calendar-alt"></i> المواعيد</a></li>
+                <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="welcome-message">
+            <h2>مرحبًا بك في نظام إدارة العيادة</h2>
+            <p>يمكنك إدارة كافة عمليات العيادة من خلال هذه اللوحة</p>
+        </div>
+        
+        <div class="dashboard-cards">
+    
+    <div class="card patient-card">
+        <i class="fas fa-user-injured"></i>
+        <h3>إدارة المرضى</h3>
+        <p>إضافة وحذف وتعديل بيانات المرضى</p>
+        <div class="count-display">
+            <span id="patientCount" class="count-number">0</span>
+            <span class="count-label">مريض مسجل</span>
+        </div>
+        <a href="patients.html" class="card-btn">الدخول <i class="fas fa-arrow-left"></i></a>
+    </div>
+    
+    <div class="card">
+        <i class="fas fa-calendar-alt"></i>
+        <h3>إدارة المواعيد</h3>
+        <p>حجز وتعديل وإلغاء المواعيد</p>
+        <a href="appointments.html" class="card-btn">الدخول <i class="fas fa-arrow-left"></i></a>
+    </div>
+</div>
+            
+            <div class="card">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>إدارة المواعيد</h3>
+                <p>حجز وتعديل وإلغاء المواعيد</p>
+                <a href="appointments.html" class="card-btn">الدخول <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        
+        // التحقق من حالة الدخول
+        if(localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = "index.html";
+        }
+        
+        // تسجيل الخروج
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>

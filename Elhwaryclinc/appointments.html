@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة المواعيد - عيادة الأسنان</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-calendar-alt"></i> إدارة المواعيد</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="patients.html"><i class="fas fa-user-injured"></i> المرضى</a></li>
+            <li><a class="active" href="appointments.html"><i class="fas fa-calendar-alt"></i> المواعيد</a></li>
+            <li><a href="payments.html"><i class="fas fa-money-bill-wave"></i> الدفع</a></li>
+            <li><a href="services.html"><i class="fas fa-teeth"></i> الخدمات</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <section class="form-section">
+            <h2><i class="fas fa-plus-circle"></i> حجز موعد جديد</h2>
+            <form id="appointmentForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <select id="appointmentPatient" required>
+                            <option value="" disabled selected>اختر المريض</option>
+                        </select>
+                        <label for="appointmentPatient">المريض</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <select id="appointmentService" required>
+                            <option value="" disabled selected>اختر الخدمة</option>
+                        </select>
+                        <label for="appointmentService">الخدمة</label>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="date" id="appointmentDate" required>
+                        <label for="appointmentDate">التاريخ</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="time" id="appointmentTime" required>
+                        <label for="appointmentTime">الوقت</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <textarea id="appointmentNotes" rows="2" placeholder=" "></textarea>
+                    <label for="appointmentNotes">ملاحظات (اختياري)</label>
+                </div>
+                
+                <button type="submit"><i class="fas fa-save"></i> حجز الموعد</button>
+                <div id="appointmentMessage" class="confirmation-message"></div>
+            </form>
+        </section>
+        
+        <section class="calendar-view">
+            <h2><i class="fas fa-calendar-week"></i> عرض المواعيد</h2>
+            <div class="calendar-controls">
+                <button id="prevWeek"><i class="fas fa-chevron-right"></i></button>
+                <h3 id="currentWeek">الأسبوع الحالي</h3>
+                <button id="nextWeek"><i class="fas fa-chevron-left"></i></button>
+            </div>
+            
+            <div class="week-days">
+                <div class="day">
+                    <div class="day-header">الأحد</div>
+                    <div class="appointments" id="sundayApps"></div>
+                </div>
+                <div class="day">
+                    <div class="day-header">الإثنين</div>
+                    <div class="appointments" id="mondayApps"></div>
+                </div>
+                <div class="day">
+                    <div class="day-header">الثلاثاء</div>
+                    <div class="appointments" id="tuesdayApps"></div>
+                </div>
+                <div class="day">
+                    <div class="day-header">الأربعاء</div>
+                    <div class="appointments" id="wednesdayApps"></div>
+                </div>
+                <div class="day">
+                    <div class="day-header">الخميس</div>
+                    <div class="appointments" id="thursdayApps"></div>
+                </div>
+                <div class="day">
+                    <div class="day-header">الجمعة</div>
+                    <div class="appointments" id="fridayApps"></div>
+                </div>
+                <div class="day">
+                    <div class="day-header">السبت</div>
+                    <div class="appointments" id="saturdayApps"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="table-section">
+            <h2><i class="fas fa-list-ul"></i> قائمة المواعيد <small>(${clinicData.appointments.length} موعد)</small></h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>التاريخ</th>
+                            <th>الوقت</th>
+                            <th>المريض</th>
+                            <th>الخدمة</th>
+                            <th>الحالة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointmentsTable"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        const appointmentForm = document.getElementById('appointmentForm');
+        const appointmentsTable = document.getElementById('appointmentsTable');
+        const appointmentMessage = document.getElementById('appointmentMessage');
+        let currentWeekStart = new Date();
+        
+        // تعبئة خيارات المرضى والخدمات
+        function populateAppointmentSelects() {
+            const patientSelect = document.getElementById('appointmentPatient');
+            const serviceSelect = document.getElementById('appointmentService');
+            
+            // مسح الخيارات الحالية
+            patientSelect.innerHTML = '<option value="" disabled selected>اختر المريض</option>';
+            serviceSelect.innerHTML = '<option value="" disabled selected>اختر الخدمة</option>';
+            
+            // تعبئة المرضى
+            clinicData.patients.forEach(patient => {
+                const option = document.createElement('option');
+                option.value = patient.name;
+                option.textContent = patient.name;
+                patientSelect.appendChild(option);
+            });
+            
+            // تعبئة الخدمات
+            clinicData.services.forEach(service => {
+                const option = document.createElement('option');
+                option.value = service.name;
+                option.textContent = service.name;
+                serviceSelect.appendChild(option);
+            });
+        }
+        
+        // عرض المواعيد في الجدول
+        function displayAppointments() {
+            appointmentsTable.innerHTML = '';
+            
+            if (clinicData.appointments.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="6" class="no-data">لا توجد مواعيد مسجلة</td>`;
+                appointmentsTable.appendChild(row);
+                return;
+            }
+            
+            clinicData.appointments.forEach((app, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${new Date(app.date).toLocaleDateString('ar-EG')}</td>
+                    <td>${app.time}</td>
+                    <td>${app.patient}</td>
+                    <td>${app.service}</td>
+                    <td class="status-${app.status || 'pending'}">${getStatusName(app.status)}</td>
+                    <td class="actions">
+                        <button class="complete" data-id="${index}">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="cancel" data-id="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </td>
+                `;
+                appointmentsTable.appendChild(row);
+            });
+            
+            // تحديث التقويم
+            updateCalendar();
+            updateWeekTitle();
+        }
+        
+        // تحديث عرض التقويم
+        function updateCalendar() {
+            const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+            
+            // مسح المواعيد الحالية
+            days.forEach(day => {
+                const container = document.getElementById(`${day}Apps`);
+                container.innerHTML = '';
+            });
+            
+            // عرض المواعيد للأسبوع الحالي
+            clinicData.appointments.forEach(app => {
+                const appDate = new Date(app.date);
+                if (isDateInCurrentWeek(appDate)) {
+                    const day = appDate.getDay();
+                    const dayName = days[day];
+                    const container = document.getElementById(`${dayName}Apps`);
+                    
+                    if (container) {
+                        const appElement = document.createElement('div');
+                        appElement.className = 'appointment-item';
+                        appElement.innerHTML = `
+                            <span class="patient-name">${app.patient}</span>
+                            <span class="service-name">${app.service}</span>
+                            <span class="app-time">${app.time}</span>
+                        `;
+                        container.appendChild(appElement);
+                    }
+                }
+            });
+        }
+        
+        // التحقق إذا كان التاريخ ضمن الأسبوع الحالي
+        function isDateInCurrentWeek(date) {
+            const weekStart = new Date(currentWeekStart);
+            weekStart.setHours(0, 0, 0, 0);
+            
+            const weekEnd = new Date(weekStart);
+            weekEnd.setDate(weekEnd.getDate() + 6);
+            weekEnd.setHours(23, 59, 59, 999);
+            
+            return date >= weekStart && date <= weekEnd;
+        }
+        
+        // تحديث عنوان الأسبوع
+        function updateWeekTitle() {
+            const weekStart = new Date(currentWeekStart);
+            const weekEnd = new Date(weekStart);
+            weekEnd.setDate(weekEnd.getDate() + 6);
+            
+            const options = { month: 'long', day: 'numeric' };
+            const startStr = weekStart.toLocaleDateString('ar-EG', options);
+            const endStr = weekEnd.toLocaleDateString('ar-EG', options);
+            
+            document.getElementById('currentWeek').textContent = `أسبوع ${startStr} - ${endStr}`;
+        }
+        
+        // تسجيل موعد جديد
+        appointmentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const newAppointment = {
+                patient: document.getElementById('appointmentPatient').value,
+                service: document.getElementById('appointmentService').value,
+                date: document.getElementById('appointmentDate').value,
+                time: document.getElementById('appointmentTime').value,
+                notes: document.getElementById('appointmentNotes').value,
+                status: 'pending'
+            };
+            
+            clinicData.appointments.push(newAppointment);
+            saveData();
+            appointmentForm.reset();
+            displayAppointments();
+            
+            showMessage('تم حجز الموعد بنجاح', 'success');
+        });
+        
+        // التنقل بين الأسابيع
+        document.getElementById('prevWeek').addEventListener('click', () => {
+            currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+            updateCalendar();
+            updateWeekTitle();
+        });
+        
+        document.getElementById('nextWeek').addEventListener('click', () => {
+            currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+            updateCalendar();
+            updateWeekTitle();
+        });
+        
+        function showMessage(text, type) {
+            appointmentMessage.textContent = text;
+            appointmentMessage.className = `confirmation-message ${type}`;
+            appointmentMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                appointmentMessage.style.display = 'none';
+            }, 3000);
+        }
+        
+        // تهيئة الصفحة
+        populateAppointmentSelects();
+        displayAppointments();
+        
+        // تعيين تاريخ اليوم كقيمة افتراضية
+        document.getElementById('appointmentDate').valueAsDate = new Date();
+    </script>
+</body>
+</html>

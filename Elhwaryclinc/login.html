@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول -Al-Hawary Clinic</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="clinic-logo">
+            <div class="logo-icon"><i class="fas fa-tooth"></i></div>
+            <h1>Al-Hawary Clinic</h1>
+        </div>
+        
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <input type="text" id="username" required placeholder=" ">
+                <label for="username"><i class="fas fa-user"></i> اسم المستخدم</label>
+            </div>
+            
+            <div class="form-group">
+                <input type="password" id="password" required placeholder=" ">
+                <label for="password"><i class="fas fa-lock"></i> كلمة المرور</label>
+            </div>
+            
+            <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
+            
+            <p class="switch-form">ليس لديك حساب؟ <a href="#" id="showSignup">إنشاء حساب</a></p>
+        </form>
+        
+        <form class="signup-form" id="signupForm" style="display: none;">
+            <div class="form-group">
+                <input type="text" id="signupName" required placeholder=" ">
+                <label for="signupName"><i class="fas fa-user"></i> الاسم الكامل</label>
+            </div>
+            
+            <div class="form-group">
+                <input type="text" id="signupUsername" required placeholder=" ">
+                <label for="signupUsername"><i class="fas fa-user-tag"></i> اسم المستخدم</label>
+            </div>
+            
+            <div class="form-group">
+                <input type="password" id="signupPassword" required placeholder=" ">
+                <label for="signupPassword"><i class="fas fa-lock"></i> كلمة المرور</label>
+            </div>
+            
+            <button type="submit" class="login-btn"><i class="fas fa-user-plus"></i> إنشاء حساب</button>
+            
+            <p class="switch-form">لديك حساب بالفعل؟ <a href="#" id="showLogin">تسجيل الدخول</a></p>
+        </form>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // التحويل بين نماذج الدخول والاشتراك
+        document.getElementById('showSignup').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'block';
+        });
+        
+        document.getElementById('showLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        });
+        
+        // تسجيل الدخول
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            const user = clinicData.users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('اسم المستخدم أو كلمة المرور غير صحيحة');
+            }
+        });
+        
+        // إنشاء حساب جديد
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const username = document.getElementById('signupUsername').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            // التحقق من عدم وجود مستخدم بنفس الاسم
+            if (clinicData.users.some(u => u.username === username)) {
+                alert('اسم المستخدم موجود بالفعل!');
+                return;
+            }
+            
+            // إضافة المستخدم الجديد (كمسؤول)
+            const newUser = {
+                id: Date.now(),
+                name,
+                username,
+                password,
+                role: 'admin'
+            };
+            
+            clinicData.users.push(newUser);
+            saveData();
+            
+            alert('تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول');
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('signupForm').reset();
+        });
+    </script>
+</body>
+</html>

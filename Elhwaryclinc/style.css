@@ -1,0 +1,992 @@
+/* التنسيقات العامة */
+
+
+:root {
+    --primary: #1abc9c;
+    --primary-dark: #16a085;
+    --secondary: #34495e;
+    --secondary-dark: #2c3e50;
+    --light: #ecf0f1;
+    --dark: #2c3e50;
+    --danger: #e74c3c;
+    --danger-dark: #c0392b;
+    --warning: #f39c12;
+    --success: #2ecc71;
+    --info: #3498db;
+    --gray: #95a5a6;
+    --gray-light: #bdc3c7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tajawal', sans-serif;
+}
+
+body {
+    background-color: #f5f6fa;
+    color: #333;
+    direction: rtl;
+    line-height: 1.6;
+}
+
+header {
+    background: var(--secondary);
+    color: white;
+    padding: 1.2rem;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+header h1 i {
+    margin-left: 10px;
+}
+
+nav {
+    background: var(--secondary-dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    display: block;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    background: var(--primary);
+}
+
+nav ul li a i {
+    margin-left: 8px;
+    font-size: 0.9rem;
+}
+
+main {
+    padding: 1.5rem;
+    min-height: calc(100vh - 120px);
+}
+
+footer {
+    background: var(--secondary-dark);
+    color: white;
+    text-align: center;
+    padding: 1.2rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+footer span {
+    color: var(--primary);
+    font-weight: 500;
+}
+
+/* تنسيقات لوحة التحكم */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.8rem;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-top: 4px solid var(--primary);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+    color: var(--secondary);
+    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.card h2 i {
+    color: var(--primary);
+    margin-left: 10px;
+    font-size: 1.1rem;
+}
+
+.card p {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--primary);
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.card ul {
+    list-style: none;
+}
+
+.card ul li {
+    padding: 0.7rem 0;
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card ul li .patient-name {
+    font-weight: 500;
+}
+
+.card ul li .app-date {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.card ul li .app-time {
+    background: var(--primary);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+/* قسم البيانات الحديثة */
+.recent-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.recent-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+}
+
+.recent-card h2 {
+    color: var(--secondary);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid var(--primary);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.recent-card h2 i {
+    margin-left: 10px;
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.recent-card h2 small {
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin-right: auto;
+    font-weight: normal;
+}
+
+.recent-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.recent-card th {
+    background: var(--secondary);
+    color: white;
+    padding: 0.8rem;
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+.recent-card td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.recent-card tr:last-child td {
+    border-bottom: none;
+}
+
+/* تنسيقات النماذج */
+.form-section {
+    background: white;
+    padding: 1.8rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    border-top: 4px solid var(--primary);
+}
+
+.form-section h2 {
+    color: var(--secondary);
+    margin-bottom: 1.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid var(--primary);
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+}
+
+.form-section h2 i {
+    margin-left: 10px;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    color: var(--secondary);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background-color: #f9f9f9;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.2);
+    background-color: white;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.radio-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.8rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: normal;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+}
+
+.radio-group input[type="radio"] {
+    width: auto;
+    margin-left: 0.5rem;
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.9rem 1.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(26, 188, 156, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button.delete {
+    background: var(--danger);
+}
+
+button.delete:hover {
+    background: var(--danger-dark);
+    box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+}
+
+button.edit {
+    background: var(--info);
+}
+
+button.edit:hover {
+    background: #2980b9;
+    box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+}
+
+button.complete {
+    background: var(--success);
+    padding: 0.6rem;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    justify-content: center;
+}
+
+button.complete:hover {
+    background: #27ae60;
+    box-shadow: 0 3px 10px rgba(46, 204, 113, 0.3);
+}
+
+button.cancel {
+    background: var(--danger);
+    padding: 0.6rem;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    justify-content: center;
+}
+
+button.cancel:hover {
+    background: var(--danger-dark);
+    box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+}
+
+/* تنسيقات الصفوف */
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* تنسيقات الجداول */
+.table-section {
+    background: white;
+    padding: 1.8rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    border-top: 4px solid var(--primary);
+}
+
+.table-section h2 {
+    color: var(--secondary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid var(--primary);
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+}
+
+.table-section h2 i {
+    margin-left: 10px;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.table-section h2 small {
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin-right: auto;
+    font-weight: normal;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+th {
+    background: var(--secondary);
+    color: white;
+    padding: 1rem;
+    text-align: right;
+    font-weight: 500;
+    position: sticky;
+    top: 0;
+}
+
+td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+    font-size: 0.95rem;
+}
+
+td.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* رسائل التأكيد */
+.confirmation-message {
+    padding: 1rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+    display: none;
+    font-size: 0.95rem;
+}
+
+.confirmation-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.confirmation-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* حالة عدم وجود بيانات */
+.no-data {
+    text-align: center;
+    padding: 2rem;
+    color: var(--gray);
+    font-style: italic;
+}
+
+/* ألوان الحالات */
+.status-pending {
+    color: var(--warning);
+    font-weight: 500;
+}
+
+.status-completed {
+    color: var(--success);
+    font-weight: 500;
+}
+
+.status-canceled {
+    color: var(--danger);
+    font-weight: 500;
+}
+
+/* تنسيقات التقويم */
+.calendar-view {
+    background: white;
+    padding: 1.8rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    border-top: 4px solid var(--primary);
+}
+
+.calendar-view h2 {
+    color: var(--secondary);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+}
+
+.calendar-view h2 i {
+    margin-left: 10px;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.calendar-controls h3 {
+    color: var(--secondary);
+    font-size: 1.1rem;
+}
+
+.calendar-controls button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.calendar-controls button:hover {
+    background: var(--primary-dark);
+    transform: none;
+}
+
+.week-days {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+.day {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.day-header {
+    background: var(--secondary);
+    color: white;
+    padding: 0.7rem;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.appointments {
+    min-height: 120px;
+    padding: 0.7rem;
+    background: #f9f9f9;
+}
+
+.appointment-item {
+    background: white;
+    border-radius: 6px;
+    padding: 0.7rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-right: 3px solid var(--primary);
+}
+
+.appointment-item .patient-name {
+    font-weight: bold;
+    color: var(--secondary);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.appointment-item .service-name {
+    color: var(--primary);
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
+}
+
+.appointment-item .app-time {
+    color: var(--gray);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.appointment-item .app-time i {
+    font-size: 0.7rem;
+}
+
+/* تنسيقات ملخص الدفع */
+.payment-summary {
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 1.8rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.summary-card h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.summary-card h3 i {
+    margin-left: 10px;
+}
+
+.summary-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.summary-item {
+    background: rgba(255,255,255,0.15);
+    padding: 1.2rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.summary-item span:first-child {
+    font-size: 0.95rem;
+}
+
+.summary-item span:last-child {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* تأثيرات النماذج المخصصة */
+.form-group input {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    padding: 10px 0;
+    background: transparent;
+    width: 100%;
+    transition: all 0.3s;
+    border-radius: 0;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-bottom-color: var(--primary);
+    box-shadow: none;
+}
+
+.form-group label {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    font-weight: normal;
+    color: var(--gray);
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group select:not([value=""]) + label,
+.form-group textarea:not(:placeholder-shown) + label {
+    top: -15px;
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.form-group select + label {
+    position: absolute;
+    top: -15px;
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 500;
+    display: none;
+}
+
+.form-group select:not([value=""]) + label {
+    display: block;
+}
+
+/* للشاشات الصغيرة */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+    
+    .dashboard, .recent-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .radio-group {
+        gap: 1rem;
+    }
+    
+    button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .week-days {
+        grid-template-columns: 1fr;
+    }
+    
+    .summary-items {
+        grid-template-columns: 1fr;
+    }
+}
+/* أنماط عامة */
+:root {
+    --primary: #1abc9c;
+    --primary-dark: #16a085;
+    --secondary: #34495e;
+    --light: #ecf0f1;
+    --dark: #2c3e50;
+    --danger: #e74c3c;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* صفحة الدخول */
+.login-page {
+    background: linear-gradient(135deg, var(--secondary), var(--dark));
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.clinic-logo {
+    margin-bottom: 2rem;
+}
+
+.clinic-logo .logo-icon {
+    font-size: 3rem;
+    color: var(--primary);
+}
+
+.clinic-logo h1 {
+    color: var(--secondary);
+    margin-top: 0.5rem;
+}
+
+.login-form .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.login-form input:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.login-form label {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    color: #777;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.login-form input:focus + label,
+.login-form input:not(:placeholder-shown) + label {
+    top: -0.8rem;
+    right: 0.8rem;
+    font-size: 0.8rem;
+    background: white;
+    padding: 0 0.5rem;
+    color: var(--primary);
+}
+
+.login-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 1rem;
+}
+
+.login-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.version {
+    margin-top: 1.5rem;
+    color: #95a5a6;
+    font-size: 0.8rem;
+}
+
+/* باقي أنماط النظام (ابقوا كما هي) */
+/* ... *//* أنماط صفحة تسجيل الدخول */
+.login-page {
+    background: linear-gradient(135deg, var(--secondary), var(--dark));
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.login-container {
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.clinic-logo {
+    margin-bottom: 2rem;
+}
+
+.clinic-logo .logo-icon {
+    font-size: 3rem;
+    color: var(--primary);
+}
+
+.clinic-logo h1 {
+    color: var(--secondary);
+    margin-top: 0.5rem;
+    font-weight: 700;
+}
+
+.login-form .form-group, 
+.signup-form .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.login-form input, 
+.signup-form input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.login-form input:focus, 
+.signup-form input:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.login-form label, 
+.signup-form label {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    color: #777;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.login-form input:focus + label,
+.login-form input:not(:placeholder-shown) + label,
+.signup-form input:focus + label,
+.signup-form input:not(:placeholder-shown) + label {
+    top: -0.8rem;
+    right: 0.8rem;
+    font-size: 0.8rem;
+    background: white;
+    padding: 0 0.5rem;
+    color: var(--primary);
+}
+
+.login-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 1rem;
+}
+
+.login-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.switch-form {
+    margin-top: 1.5rem;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.switch-form a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.switch-form a:hover {
+    text-decoration: underline;
+}

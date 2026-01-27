@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AL-hwary Clinic </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-tooth"></i> AL-hwary Clinic Management System</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a class="active" href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="patients.html"><i class="fas fa-user-injured"></i> المرضى</a></li>
+            <li><a href="services.html"><i class="fas fa-teeth"></i> الخدمات</a></li>
+            <li><a href="payments.html"><i class="fas fa-money-bill-wave"></i> الدفع</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <div class="dashboard">
+            <div class="card">
+                <h2><i class="fas fa-users"></i> المرضى اليوم</h2>
+                <p id="todayPatients">0</p>
+            </div>
+            
+            <div class="card">
+                <h2><i class="fas fa-coins"></i> الإيرادات</h2>
+                <p id="todayIncome">0 ج</p>
+            </div>
+            
+            <div class="card">
+                <h2><i class="fas fa-calendar-check"></i> المواعيد</h2>
+                <ul id="appointmentsList"></ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p> Develped by <span> Eng /Salma Elhwary</span> &copy; <span id="year"></span></p>
+    </footer>
+
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+    <script>
+        // تحديث السنة تلقائياً
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
