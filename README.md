@@ -1,8 +1,11 @@
    # 🦷 Dental Clinic System (Elhwary Clinic)
 📄 Description
-This is a web-based application designed to streamline the administrative operations of a dental clinic. The system provides a clean, professional interface for managing patient records, scheduling appointments, tracking payments, and viewing clinic statistics through a centralized dashboard.
+
+  
+  This is a web-based application designed to streamline the administrative operations of a dental clinic. The system provides a clean, professional interface for managing patient records, scheduling appointments, tracking payments, and viewing clinic statistics through a centralized dashboard.
 
 ✨ Features
+
 Authentication: Secure login page for authorized clinic staff.
 
 Professional Dashboard: A high-level overview of clinic activities and statistics.
@@ -31,6 +34,7 @@ JavaScript: To handle interactivity, data logic, and navigation.
 
 📁 Project Structure
 Plaintext
+
 
 Dental-Clinic-System/
 ├── README.md             # Project documentation
