@@ -37,8 +37,9 @@ Plaintext
 
 
 Dental-Clinic-System/
-├── README.md             # Project documentation
-├── index.html            # Landing / Welcome page
+├── README.md               # Project documentation
+├── index.html    
+# Landing / Welcome page
 ├── login.html            # Secure staff login page
 ├── dashboard.html        # Main admin control panel
 ├── patients.html         # Patient records management
