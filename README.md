@@ -32,23 +32,8 @@ CSS3: For modern styling, animations, and responsive UI design.
 
 JavaScript: To handle interactivity, data logic, and navigation.
 
-📁 Project Structure
-Plaintext
 
-
-Dental-Clinic-System/
-├── README.md               # Project documentation
-├── index.html    
-# Landing / Welcome page
-├── login.html            # Secure staff login page
-├── dashboard.html        # Main admin control panel
-├── patients.html         # Patient records management
-├── appointments.html     # Scheduling and calendar view
-├── payments.html         # Billing and invoice tracking
-├── services.html         # Dental services and price list
-├── style.css             # Global stylesheet for the entire system
-└── app.js                # Logic for interactivity and UI updates
-⚙️ Installation & Setup
+ # ⚙️ Installation & Setup
 Clone the repository:
 
 Bash
@@ -61,7 +46,7 @@ Bash
 cd Dental-Clinic-System
 Usage: Open index.html or login.html in any modern web browser. No additional server setup or dependencies are required as this is a static web application.
 
-💻 Git Commands Reference
+ # 💻 Git Commands Reference
 Check status: git status
 
 Add files: git add .
@@ -70,5 +55,5 @@ Commit changes: git commit -m "Add your message here"
 
 Push to GitHub: git push origin main
 
-📜 License
+ # 📜 License
 This project is for educational purposes. No specific license is applied.
