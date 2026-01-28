@@ -1,4 +1,4 @@
-🦷 Dental Clinic System (Elhwary Clinic)
+   # 🦷 Dental Clinic System (Elhwary Clinic)
 📄 Description
 This is a web-based application designed to streamline the administrative operations of a dental clinic. The system provides a clean, professional interface for managing patient records, scheduling appointments, tracking payments, and viewing clinic statistics through a centralized dashboard.
 
